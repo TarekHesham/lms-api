@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuizSubmission extends Model
 {
+    protected $fillable = [
+        'student_id',
+        'quiz_id',
+        'score',
+        'total_points',
+        'percentage',
+        'rank',
+        'attempt_number',
+        'started_at',
+        'submitted_at'
+    ];
+
     public function student()
     {
         return $this->belongsTo(Student::class);

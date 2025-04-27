@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    public function student()
+    protected $table = 'quizes';
+
+    public function user()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(User::class);
     }
 
     public function questions()
@@ -23,8 +25,10 @@ class Quiz extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('is_published', true)
-            ->where('start_time', '<=', now())
-            ->where('end_time', '>=', now());
+        $now = now();
+
+        return $query->where('is_published', 1)
+            ->where('start_at', '<=', $now)
+            ->where('end_at', '>=', $now);
     }
 }
