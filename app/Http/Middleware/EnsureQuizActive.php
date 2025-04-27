@@ -18,14 +18,16 @@ class EnsureQuizActive
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Get data for current quiz when request
         $quiz = $request->route('quiz');
         $now  = now();
 
+        // Check quiz if stall available
         $isNotPublished = !$quiz->is_published;
-        $started = $quiz->start_at && $now->lt($quiz->start_at);
-        $ended = $quiz->end_at && $now->gt($quiz->end_at);
+        $hasNotStarted  = $quiz->start_at && $now->lt($quiz->start_at);
+        $ended          = $quiz->end_at && $now->gt($quiz->end_at);
 
-        if ($isNotPublished || !$started || $ended) {
+        if ($isNotPublished || $hasNotStarted || $ended) {
             return $this->errorResponse('This quiz is not active', Response::HTTP_UNAUTHORIZED);
         }
 

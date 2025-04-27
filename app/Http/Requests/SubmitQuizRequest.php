@@ -22,25 +22,25 @@ class SubmitQuizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'student_id' => ['required', 'exists:students,id'],
-            'answers' => ['required', 'array', 'min:1'],
+            'student_id'            => ['required', 'exists:students,id'],
+            'answers'               => ['required', 'array', 'min:1'],
             'answers.*.question_id' => ['required', 'exists:questions,id'],
-            'answers.*.option_id' => ['required', 'exists:question_options,id'],
+            'answers.*.option_id'   => ['required', 'exists:question_options,id'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'student_id.required' => 'The student_id field is required.',
-            'student_id.exists' => 'The selected student_id is invalid.',
-            'answers.required' => 'The answers field is required.',
-            'answers.array' => 'The answers field must be an array.',
-            'answers.min' => 'At least one answer is required.',
+            'student_id.required'            => 'The student_id field is required.',
+            'student_id.exists'              => 'The selected student_id is invalid.',
+            'answers.required'               => 'The answers field is required.',
+            'answers.array'                  => 'The answers field must be an array.',
+            'answers.min'                    => 'At least one answer is required.',
             'answers.*.question_id.required' => 'The question_id field is required.',
-            'answers.*.question_id.exists' => 'The selected question_id is invalid.',
-            'answers.*.option_id.required' => 'The option_id field is required.',
-            'answers.*.option_id.exists' => 'The selected option_id is invalid.',
+            'answers.*.question_id.exists'   => 'The selected question_id is invalid.',
+            'answers.*.option_id.required'   => 'The option_id field is required.',
+            'answers.*.option_id.exists'     => 'The selected option_id is invalid.',
         ];
     }
 }

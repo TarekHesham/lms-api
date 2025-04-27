@@ -53,8 +53,8 @@ class QuizSubmissionService
     {
         $quiz->load('questions.options');
 
-        $score       = 0;
-        $payload     = [];
+        $score   = 0;
+        $payload = [];
 
         foreach ($answers as $ans) {
             $question = $quiz->questions->firstWhere('id', $ans['question_id']);
@@ -63,7 +63,7 @@ class QuizSubmissionService
                 throw new InvalidArgumentException("Question {$ans['question_id']} invalid");
             }
 
-            $option   = $question->options->firstWhere('id', $ans['option_id']);
+            $option = $question->options->firstWhere('id', $ans['option_id']);
 
             if (! $option) {
                 throw new InvalidArgumentException("Option {$ans['option_id']} invalid for question {$ans['question_id']}");
@@ -94,11 +94,11 @@ class QuizSubmissionService
         $higher  = $quiz->submissions()->where('score', '>', $score)->count();
 
         $submission->update([
-            'submitted_at' => now(),
-            'score'        => $score,
-            'total_points' => $totalPoints,
-            'percentage'   => $percentage,
-            'rank'         => $higher + 1,
+            'submitted_at'  => now(),
+            'score'         => $score,
+            'total_points'  => $totalPoints,
+            'percentage'    => $percentage,
+            'rank'          => $higher + 1,
             'average_score' => round($average, 2),
         ]);
     }

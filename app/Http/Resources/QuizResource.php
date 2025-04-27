@@ -15,16 +15,16 @@ class QuizResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'quiz_id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'start_at' => $this->start_at,
-            'end_at' => $this->end_at,
-            'duration_minutes' => $this->duration_minutes,
-            'is_published' => $this->is_published,
-            'max_attempts' => $this->max_attempts,
-            'creator' => new CreatorResource($this->user),
-            'questions' => QuestionResource::collection($this->questions),
+            'quiz_id'           => $this->id,
+            'title'             => $this->title,
+            'description'       => $this->description,
+            'start_at'          => $this->start_at,
+            'end_at'            => $this->end_at,
+            'duration_minutes'  => $this->duration_minutes,
+            'is_published'      => (bool) $this->is_published,
+            'max_attempts'      => $this->max_attempts,
+            'creator'           => new CreatorResource($this->user),
+            'questions'         => QuestionResource::collection($this->questions),
         ];
     }
 }

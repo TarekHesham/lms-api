@@ -12,7 +12,7 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function quizeSubmissions() {
+    public function quizSubmissions() {
         return $this->hasMany(QuizSubmission::class);
     }
 }

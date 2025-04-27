@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quiz_id')->constrained('quizes')->cascadeOnDelete();
+            $table->foreignId('quiz_id')->constrained('quizzes')->cascadeOnDelete();
             $table->string('question');
             $table->enum('question_type', ['multiple_choice', 'true_false'])->default('multiple_choice');
             $table->integer('points');

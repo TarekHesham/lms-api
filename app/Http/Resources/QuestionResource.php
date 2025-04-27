@@ -15,11 +15,11 @@ class QuestionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'question_id' => $this->id,
-            'question' => $this->question,
+            'question_id'   => $this->id,
+            'question'      => $this->question,
             'question_type' => $this->question_type,
-            'points' => $this->points,
-            'options' => OptionResource::collection($this->options),
+            'points'        => (int) $this->points,
+            'options'       => OptionResource::collection($this->options),
         ];
     }
 }

@@ -18,6 +18,7 @@ class QuizSubmissionController extends Controller
 
     public function submit(SubmitQuizRequest $request, Quiz $quiz)
     {
+        // Submission logic in quiz submission service.
         $submission = $this->service->submit(
             $quiz,
             $request->validated('student_id'),

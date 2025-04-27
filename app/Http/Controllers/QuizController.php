@@ -13,12 +13,12 @@ class QuizController extends Controller
 
     public function index(Request $request)
     {
-        return $this->successResponse(Quiz::all(), 'Display all active quizzes');
+        return $this->successResponse(Quiz::active()->get(), 'Display all active quizzes');
     }
 
     public function show(Quiz $quiz)
     {
-        // Eager loading for performance
+        // Eager loading for better performance
         $quiz->load(['questions.options', 'user']);
 
         return $this->successResponse(new QuizResource($quiz), 'Display a specific quiz');

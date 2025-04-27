@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    protected $table = 'quizes';
+    protected $table = 'quizzes';
 
     public function user()
     {
@@ -27,8 +27,6 @@ class Quiz extends Model
     {
         $now = now();
 
-        return $query->where('is_published', 1)
-            ->where('start_at', '<=', $now)
-            ->where('end_at', '>=', $now);
+        return $query->where('is_published', true);
     }
 }

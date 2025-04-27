@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('quiz_submissions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
-            $table->foreignId('quiz_id')->constrained('quizes')->cascadeOnDelete();
+            $table->foreignId('quiz_id')->constrained('quizzes')->cascadeOnDelete();
 
             $table->unsignedSmallInteger('score')->nullable();
             $table->unsignedSmallInteger('total_points')->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quizze_submissions');
+        Schema::dropIfExists('quiz_submissions');
     }
 };
