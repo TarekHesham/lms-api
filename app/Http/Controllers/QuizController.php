@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\QuizResource;
 use App\Models\Quiz;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class QuizController extends Controller
     public function show(Quiz $quiz)
     {
         // Eager loading for performance
-        $quiz->load(['questions.options']);
+        $quiz->load(['questions.options', 'user']);
 
-        return $this->successResponse($quiz, 'Display a specific quiz');
+        return $this->successResponse(new QuizResource($quiz), 'Display a specific quiz');
     }
 }
