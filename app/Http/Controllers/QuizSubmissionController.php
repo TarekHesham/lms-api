@@ -29,6 +29,9 @@ class QuizSubmissionController extends Controller
             return $this->errorResponse('You have reached the maximum number of attempts', 422);
         }
 
-        return new QuizSubmissionResource($submission);
+        return $this->successResponse(
+            new QuizSubmissionResource($submission),
+            'Answers submitted successfully.'
+        );
     }
 }
