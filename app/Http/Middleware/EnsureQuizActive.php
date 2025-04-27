@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class EnsureQuizActive
 {
     use ApiResponse;
+
     /**
      * Handle an incoming request.
      *
@@ -20,11 +21,11 @@ class EnsureQuizActive
         $quiz = $request->route('quiz');
         $now  = now();
 
-        if (
-            ! $quiz->is_published
-            || ($quiz->start_time && $now->lt($quiz->start_time))
-            || ($quiz->end_time   && $now->gt($quiz->end_time))
-        ) {
+        $isNotPublished = !$quiz->is_published;
+        $started = $quiz->start_at && $now->lt($quiz->start_at);
+        $ended = $quiz->end_at && $now->gt($quiz->end_at);
+
+        if ($isNotPublished || !$started || $ended) {
             return $this->errorResponse('This quiz is not active', Response::HTTP_UNAUTHORIZED);
         }
 
